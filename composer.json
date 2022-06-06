@@ -1,0 +1,21 @@
+{
+    "name": "wramirez83/sjwt",
+    "description": "token generation",
+    "type": "library",
+    "require": {
+        "vlucas/phpdotenv": "^5.4",
+        "nesbot/carbon": "^2.58"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Wramirez83\\Sjwt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wilson Ramirez Z",
+            "email": "wilson.rz@gmail.com"
+        }
+    ]
+}
