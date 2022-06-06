@@ -56,5 +56,12 @@ class SJWT{
             $signatureProvided,
         ];
 
+    }
+    public static function tokenExpired(){
+        return self::$tokenExpired;
+    }
+
+    public static function signatureValid(){
+        return self::$signatureValid;
     }    
 }
