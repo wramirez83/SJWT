@@ -39,7 +39,7 @@ class SJWT{
 
         // check the expiration time - note this will cause an error if there is no 'exp' claim in the token
         $expiration = Carbon::createFromTimestamp(json_decode($payload)->exp);
-        self::$tokenExpired = (Carbon::now()->diffInSeconds($expiration, false) < 0);
+        $tokenExpired = (Carbon::now()->diffInSeconds($expiration, false) < 0);
 
         // build a signature based on the header and payload using the secret
         $base64UrlHeader = UrlEncode::base64UrlEncode($header);
@@ -48,20 +48,15 @@ class SJWT{
         $base64UrlSignature = UrlEncode::base64UrlEncode($signature);
 
         // verify it matches the signature provided in the token
-        self::$signatureValid = ($base64UrlSignature === $signatureProvided);
+        $signatureValid = ($base64UrlSignature === $signatureProvided);
 
         return [
             $header,
             $payload,
             $signatureProvided,
+            $signatureValid,
+            $tokenExpired
         ];
 
     }
-    public static function tokenExpired(){
-        return self::$tokenExpired;
-    }
-
-    public static function signatureValid(){
-        return self::$signatureValid;
-    }    
 }
