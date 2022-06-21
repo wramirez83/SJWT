@@ -56,8 +56,8 @@ class SJWT{
             $signatureValid = ($base64UrlSignature === $signatureProvided);
     
             return [
-                $header,
-                $payload,
+                json_decode($header),
+                json_decode($payload),
                 $signatureProvided,
                 $signatureValid,
                 $tokenExpired
