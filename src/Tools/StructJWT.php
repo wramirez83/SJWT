@@ -1,5 +1,6 @@
 <?php
 namespace Wramirez83\Sjwt\Tools;
+use Carbon\Carbon;
 
 class StructJWT{
     
@@ -10,7 +11,7 @@ class StructJWT{
     }
 
     public static function setPayload($payload = [], $exp){
-            $payload['exp'] = time() + $exp;
+            $payload['exp'] = Carbon::now()->timezone('America/Bogota')->addSeconds($exp);
             return UrlEncode::base64UrlEncode(json_encode($payload));
     }
 
