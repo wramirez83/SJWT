@@ -11,7 +11,7 @@ class StructJWT{
     }
 
     public static function setPayload($payload = [], $exp){
-            $payload['exp'] = Carbon::now()->timezone('America/Bogota')->addSeconds($exp);
+            $payload['exp'] = strtotime(Carbon::now()->timezone('America/Bogota')->addSeconds($exp));
             return UrlEncode::base64UrlEncode(json_encode($payload));
     }
 
