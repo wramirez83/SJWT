@@ -1,6 +1,7 @@
 {
     "name": "wramirez83/sjwt",
     "description": "token generation",
+    "version": "1.0.0",
     "type": "library",
     "require": {
         "vlucas/phpdotenv": "^5.5",
