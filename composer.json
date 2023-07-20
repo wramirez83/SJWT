@@ -3,8 +3,8 @@
     "description": "token generation",
     "type": "library",
     "require": {
-        "vlucas/phpdotenv": "^5.4",
-        "nesbot/carbon": "^2.58"
+        "vlucas/phpdotenv": "^5.5",
+        "nesbot/carbon": "^2.68"
     },
     "license": "MIT",
     "autoload": {
