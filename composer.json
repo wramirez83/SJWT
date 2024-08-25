@@ -1,10 +1,10 @@
 {
     "name": "wramirez83/sjwt",
     "description": "token generation",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "type": "library",
     "require": {
-        "vlucas/phpdotenv": "^5.6",
+        "vlucas/phpdotenv": "^5.6.1",
         "nesbot/carbon": "^3.8.0"
     },
     "license": "MIT",
