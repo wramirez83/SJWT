@@ -4,53 +4,46 @@ namespace Wramirez83\Sjwt;
 
 use App\Models\User;
 
-/* A class that is used to authenticate users. */
-class UserAuth
+final class UserAuth
 {
-    private static $instance;
-    /**
-     * > The function checks if the instance of the class is not an instance of itself, if it's not, it
-     * creates a new instance of itself and returns it
-     *
-     * @return The user() method is being returned.
-     */
-    public static function user()
+    private static ?self $instance = null;
+
+    public int $id;
+    public string $name;
+    public string $email;
+    // Puedes agregar más propiedades según lo que tenga tu modelo User.
+
+    private function __construct() {}
+
+    public static function user(): self
     {
-        if (! self::$instance instanceof self) {
+        if (!self::$instance instanceof self) {
             self::$instance = new self();
         }
 
         return self::$instance;
     }
 
-    /**
-     * It takes an array of key/value pairs and sets the object's attributes to the values
-     *
-     * @param data The data to be set.
-     */
-    public function setAtt($data)
+    public function setAtt(array $data): void
     {
         foreach ($data as $key => $value) {
-            $this->{$key} = $value;
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
         }
     }
 
-    /**
-     * It returns the object itself.
-     *
-     * @return The object itself.
-     */
-    public function getAtt()
+    public function getAtt(): self
     {
         return $this;
     }
 
-    public function refresh(){
-        $data = User::whereId($this->id)->get()->toArray();
-        foreach ($data as $key => $value) {
-            $this->{$key} = $value;
+    public function refresh(): void
+    {
+        $user = User::find($this->id);
+
+        if ($user) {
+            $this->setAtt($user->toArray());
         }
     }
-
-    
 }
