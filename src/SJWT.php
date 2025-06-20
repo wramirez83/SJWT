@@ -67,7 +67,7 @@ class SJWT
             if (!$secret) {
                 throw new \RuntimeException('JWT secret is not set.');
             }
-
+            //Validate the JWT format
             if ($jwt === '.') {
                 $headers = function_exists('getallheaders') ? getallheaders() : $_SERVER;
                 if (!isset($headers[$listJwt])) {
