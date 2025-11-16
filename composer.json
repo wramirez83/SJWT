@@ -1,7 +1,6 @@
 {
     "name": "wramirez83/sjwt",
     "description": "Simple and efficient JWT (JSON Web Token) generation and validation library for Laravel 12",
-    "version": "3.0.0",
     "type": "library",
     "keywords": [
         "jwt",
