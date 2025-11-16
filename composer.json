@@ -1,11 +1,24 @@
 {
     "name": "wramirez83/sjwt",
-    "description": "token generation",
-    "version": "2.1.0",
+    "description": "Simple and efficient JWT (JSON Web Token) generation and validation library for Laravel 12",
+    "version": "3.0.0",
     "type": "library",
+    "keywords": [
+        "jwt",
+        "json-web-token",
+        "authentication",
+        "laravel",
+        "laravel-12"
+    ],
     "require": {
-        "vlucas/phpdotenv": "^5.6.2",
-        "nesbot/carbon": "^3.10.0"
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0",
+        "illuminate/http": "^11.0|^12.0",
+        "nesbot/carbon": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "orchestra/testbench": "^10.0|^11.0"
     },
     "license": "MIT",
     "autoload": {
@@ -13,10 +26,29 @@
             "Wramirez83\\Sjwt\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Wramirez83\\Sjwt\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wramirez83\\Sjwt\\SjwtServiceProvider"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "Wilson Ramirez Z",
             "email": "wilson.rz@gmail.com"
         }
-    ]
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "test:unit": "phpunit --testsuite=Unit",
+        "test:feature": "phpunit --testsuite=Feature"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
