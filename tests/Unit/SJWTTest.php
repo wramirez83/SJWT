@@ -41,13 +41,32 @@ class SJWTTest extends TestCase
 
     public function testEncodeThrowsExceptionWhenSecretNotSet(): void
     {
+        // Save original values
+        $originalEnv = $_ENV['SECRET_JWT'] ?? null;
+        $originalGetenv = getenv('SECRET_JWT');
+        
+        // Clear both
         unset($_ENV['SECRET_JWT']);
+        if ($originalGetenv !== false) {
+            putenv('SECRET_JWT=');
+        }
         SJWT::clearSecretCache();
         
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('JWT secret is not set');
         
-        SJWT::encode(['test' => 'data']);
+        try {
+            SJWT::encode(['test' => 'data']);
+        } finally {
+            // Restore original values
+            if ($originalEnv !== null) {
+                $_ENV['SECRET_JWT'] = $originalEnv;
+            }
+            if ($originalGetenv !== false) {
+                putenv('SECRET_JWT=' . $originalGetenv);
+            }
+            SJWT::clearSecretCache();
+        }
     }
 
     public function testDecodeValidToken(): void

@@ -39,11 +39,21 @@ class SJWT
         }
 
         // Try Laravel config first (for better integration)
-        if (function_exists('config')) {
-            $secret = config('sjwt.secret');
-            if ($secret) {
-                self::$secretCache = $secret;
-                return $secret;
+        // Check if Laravel is available and config function can be safely called
+        if (function_exists('config') 
+            && class_exists('\Illuminate\Support\Facades\Config')
+            && class_exists('\Illuminate\Foundation\Application')) {
+            try {
+                $app = app();
+                if ($app && method_exists($app, 'make')) {
+                    $secret = config('sjwt.secret');
+                    if ($secret) {
+                        self::$secretCache = $secret;
+                        return $secret;
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Laravel not initialized, fall through to environment variables
             }
         }
 
